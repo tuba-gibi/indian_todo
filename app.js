@@ -4,18 +4,19 @@ console.log(listContainer);
 
 //! /////////////////////////////    EVENTS EVENTS 🤭     /////////////////////////////////////
 
-listContainer.addEventListener("click", function (e) {
-  if (e.target.tagName === "LI") {
-    e.target.classList.toggle("checked"); //?toggle : if the class name exists, remove it; otherwise add it..
-    saveData();
-
-  } else if (e.target.tagName === "SPAN") {
-    e.target.parentElement.remove();
-    saveData();
-
-  }
-  
-},false);
+listContainer.addEventListener(
+  "click",
+  function (e) {
+    if (e.target.tagName === "LI") {
+      e.target.classList.toggle("checked"); //?toggle : if the class name exists, remove it; otherwise add it..
+      saveData();
+    } else if (e.target.tagName === "SPAN") {
+      e.target.parentElement.remove();
+      saveData();
+    }
+  },
+  false
+);
 
 //! /////////////////////////////    FUNCTIONS     /////////////////////////////////////
 
@@ -27,19 +28,27 @@ let addTask = function () {
     let li = document.createElement("li");
     li.innerHTML = inputBox.value;
     listContainer.appendChild(li);
+
+    //? SPAN /////
+
     let span = document.createElement("span");
-    span.innerHTML = "x";
+    span.innerHTML = `<i class="fa fa-trash"></i>`;
+    span.addEventListener("click", function (e) {
+      e.target.parentElement.remove(); //? li.remove() is also OK
+      saveData();
+    });
     li.appendChild(span);
   }
+
   inputBox.value = "";
   saveData();
-  };
+};
 
 function saveData() {
   localStorage.setItem("data", listContainer.innerHTML);
-};
+}
 
 function showListData() {
   listContainer.innerHTML = localStorage.getItem("data");
-};
-showListData()
+}
+showListData();
