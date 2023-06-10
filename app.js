@@ -14,6 +14,7 @@ listContainer.addEventListener("click", function (e) {
     saveData();
 
   }
+  
 },false);
 
 //! /////////////////////////////    FUNCTIONS     /////////////////////////////////////
